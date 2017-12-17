@@ -1,0 +1,242 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> - StickyNotes</title>
+<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="/css/site.css">
+    
+</head>
+<body>
+<div class="container body-content">
+        
+<meta charset="utf-8">
+<title>Sticky notes using CSS3 and Google Fonts (Step 5)</title>
+<link href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css"> 
+<style type="text/css">
+*{
+  margin:0;
+  padding:0;
+}
+body{
+  font-family:arial,sans-serif;
+  font-size:200%;
+  margin:3em;
+  background:#fff;
+  color:#000;
+}
+h2,p{
+  font-size:100%;
+  font-weight:normal;
+}
+ul,li{
+  list-style:none;
+}
+ul{
+  overflow:hidden;
+  padding:3em;
+}
+ul li a{
+  text-decoration:none;
+  color:#000;
+  background:#ffc;
+  display:block;
+  height:10em;
+  width:10em;
+  padding:1em;
+  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -moz-transition:-moz-transform .15s linear;
+  -o-transition:-o-transform .15s linear;
+  -webkit-transition:-webkit-transform .15s linear;
+}
+ul li{
+  margin:1em;
+  float:left;
+}
+ul li h2{
+  font-size:140%;
+  font-weight:bold;
+  padding-bottom:10px;
+}
+ul li p{
+  font-family:"Reenie Beanie",arial,sans-serif;
+  font-size:75%;
+}
+ul li a{
+  -webkit-transform: rotate(-6deg);
+  -o-transform: rotate(-6deg);
+  -moz-transform:rotate(-6deg);
+}
+ul li:nth-child(even) a{
+  -o-transform:rotate(4deg);
+  -webkit-transform:rotate(4deg);
+  -moz-transform:rotate(4deg);
+  position:relative;
+  top:5px;
+  background:#cfc;
+}
+ul li:nth-child(3n) a{
+  -o-transform:rotate(-3deg);
+  -webkit-transform:rotate(-3deg);
+  -moz-transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+  background:#ccf;
+}
+ul li:nth-child(5n) a{
+  -o-transform:rotate(5deg);
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  position:relative;
+  top:-10px;
+}
+ul li a:hover,ul li a:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  position:relative;
+  z-index:5;
+}
+ol{text-align:center;}
+ol li{display:inline;padding-right:1em;}
+ol li a{color:#fff;}
+</style>
+
+      <form id="InputForm" method="post">
+        <fieldset>
+          <legend>Smart Sticky Notes</legend>
+          <div>
+            <label for="task">Things to do...</label>
+            <input type="text" id="task" value="" style="width: 600px;">
+          </div>
+          <div class="submitLabel" style="margin-left: 425px;">
+            <label>&nbsp;</label>
+            <input type="submit" value="Submit" onclick="inputhndlr();">
+          </div>
+        </fieldset>
+      <input name="__RequestVerificationToken" type="hidden" value="CfDJ8CcdPXGUNodHlWOgNeI9GHZDfnoPF6jdMOS-Fh1QWm2jZLt_HvS2HWkomobV15TYXUWhUMfklmhL-SWOxpBAJyO-2hwC50MQsaysi4IXuCNKhKV31SK9dVg1vw4NV2QSopqbeyl12dLedH1XCrMPtp0"></form>
+        
+  <ul>
+    <li>
+     <a href="#">
+      <p id="content"></p>
+	 </a>
+      </li>
+    
+    <li>
+     <a href="#">
+       <p id="content2"></p>
+	 </a>
+    </li>
+            
+    <li>
+      <a href="#">
+       <p id="content3"></p>
+      </a>
+    </li>
+            
+   <li>
+      <a href="#">
+       <p id="content4"></p>
+	  </a>
+    </li>
+  </ul>
+        
+    <script>
+      function hndlr(response) {
+        for (var i = 0; i < 2; i++) {
+            var item = response.items[i];
+            document.getElementById("content").innerHTML += "<br>" + item.htmlTitle;
+      }
+        for (var i = 3; i < 5; i++) {
+            var item = response.items[i];
+            document.getElementById("content2").innerHTML += "<br>" + item.htmlTitle;
+      }
+        for (var i = 6; i < 8; i++) {
+            var item = response.items[i];
+            document.getElementById("content3").innerHTML += "<br>" + item.htmlTitle;
+      }
+        for (var i = 9; i < 11; i++) {
+            var item = response.items[i];
+            document.getElementById("content4").innerHTML += "<br>" + item.htmlTitle;
+      }
+    }
+    </script>
+    <script src="https://www.googleapis.com/customsearch/v1?key=AIzaSyC4qDCuu5vZgNC0NYlzrbW3YygIvCsf0B4&amp;cx=017576662512468239146:omuauf_lfve&amp;q=computerscience&amp;callback=hndlr">
+    </script>
+   
+    <center><input id="pac-input" class="controls" type="text" placeholder="Search Box"></center>
+    <div id="map"></div>
+    <script>
+
+      function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13,
+          mapTypeId: 'roadmap'
+        });
+
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+ 
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+    </script>
+        
+    <p align="center"><iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/search?q=computer%20science%20villanova&amp;key=AIzaSyDaICXtoZhE-2VsZe7uezHmS4z0r3UqxNA" allowfullscreen=""></iframe></p>
+
+	</div>
+	</body>	
+    </html>
